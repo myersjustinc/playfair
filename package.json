@@ -1,0 +1,16 @@
+{
+  "name": "playfair",
+  "title": "Playfair.js",
+  "description": "Compatibility layer for Google's charting systems",
+  "version": "0.1.0-dev",
+  "author": {
+    "name": "Justin Myers",
+    "url": "http://www.justinmyers.net/"
+  },
+  "dependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-contrib-uglify": "~0.1.1",
+    "grunt-contrib-jshint": "~0.1.1"
+  }
+}
