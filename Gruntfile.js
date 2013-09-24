@@ -20,17 +20,6 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
-    uglify: {
-      options: {
-        banner: '<%= meta.banner %>'
-      },
-      dist: {
-        src: [
-          '<%= concat.js.dest %>'
-        ],
-        dest: 'dist/<%= pkg.name %>.min.js'
-      }
-    },
     jshint: {
       all: [
         'Gruntfile.js',
@@ -55,10 +44,27 @@ module.exports = function(grunt) {
           PF: true
         }
       }
+    },
+    qunit: {
+      all: [
+        'test/**/*.html'
+      ]
+    },
+    uglify: {
+      options: {
+        banner: '<%= meta.banner %>'
+      },
+      dist: {
+        src: [
+          '<%= concat.js.dest %>'
+        ],
+        dest: 'dist/<%= pkg.name %>.min.js'
+      }
     }
   });
   grunt.loadNpmTasks( 'grunt-contrib-jshint' );
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
   grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-  grunt.registerTask( 'default', [ 'jshint', 'concat', 'uglify' ] );
+  grunt.loadNpmTasks( 'grunt-contrib-qunit' );
+  grunt.registerTask( 'default', [ 'jshint', 'concat', 'uglify', 'qunit' ] );
 };
