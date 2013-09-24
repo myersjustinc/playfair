@@ -66,5 +66,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
   grunt.loadNpmTasks( 'grunt-contrib-uglify' );
   grunt.loadNpmTasks( 'grunt-contrib-qunit' );
-  grunt.registerTask( 'default', [ 'jshint', 'concat', 'uglify', 'qunit' ] );
+  grunt.registerTask( 'default', [ 'jshint', 'concat', 'qunit', 'uglify' ] );
+  grunt.registerTask( 'fast', [ 'jshint', 'concat', 'uglify' ] );
 };
