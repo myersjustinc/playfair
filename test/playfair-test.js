@@ -1,10 +1,25 @@
 (function( window ) {
 'use strict';
 
-var QUnit = window.QUnit;
+var PF = window.PF,
+  QUnit = window.QUnit;
 
-QUnit.test( 'test for testing', function( assert ) {
-  assert.equal( 1 + 1, 2 );
+QUnit.test( 'Hash parsing', function( assert ) {
+  var basicHash,
+    basicHashResults;
+
+  basicHash = 'a=1&b=2&c=wtf&d=ohai';
+  basicHashResults = {
+    a: '1',
+    b: '2',
+    c: 'wtf',
+    d: 'ohai'
+  };
+  assert.deepEqual(
+    PF.utils.parseHash( basicHash ), basicHashResults, 'Hash parsing works' );
+  assert.deepEqual(
+    PF.utils.parseHash( '#' + basicHash ), basicHashResults,
+    'Hash parser ignores leading hash mark' );
 });
 
 }( this ));
