@@ -55,4 +55,17 @@ QUnit.test( 'Multiple-error logging', function( assert ) {
     errorElem.getElementsByTagName( 'p' ).length, 2, 'Errors logged' );
 });
 
+QUnit.test( 'Option parsing', function( assert ) {
+  var errorElem = setupErrorElem();
+
+  assert.deepEqual( PF.opts.chs( '500x450' ), {
+    height: 450,
+    width: 500
+  }, 'Correctly parses chart size' );
+  assert.deepEqual( PF.opts.chs( 'wtf' ), {
+    height: 200,
+    width: 300
+  }, 'Chart size falls back to default with malformed input' );
+});
+
 }( this ));

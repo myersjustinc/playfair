@@ -8,7 +8,8 @@ PF.init = function init( hash, chartId ) {
   });
 
   google.setOnLoadCallback(function() {
-    var chartElem = window.document.getElementById( chartId );
+    var chartElem = window.document.getElementById( chartId ),
+      dimensions = PF.opts.chs( hashOptions.chs );
 
     log( 'Loaded.' );  // TODO: Fill out the rest of this.
   });

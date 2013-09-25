@@ -14,6 +14,8 @@ module.exports = function(grunt) {
       js: {
         src: [
           'src/intro.js',
+          'src/PF/defaults.js',
+          'src/PF/opts.js',
           'src/PF/utils.js',
           'src/PF/init.js',
           'src/outro.js'
