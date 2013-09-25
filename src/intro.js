@@ -11,7 +11,8 @@ function log() {
   }
 }
 
-var PF = window.PF || {};
+var google = window.google || {},
+  PF = window.PF || {};
 
 window.PF = PF;
 

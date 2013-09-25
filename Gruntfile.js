@@ -15,6 +15,7 @@ module.exports = function(grunt) {
         src: [
           'src/intro.js',
           'src/PF/utils.js',
+          'src/PF/init.js',
           'src/outro.js'
         ],
         dest: 'dist/<%= pkg.name %>.js'
@@ -39,8 +40,9 @@ module.exports = function(grunt) {
         browser: true,
         loopfunc: true,
         globals: {
-          $: true,
-          log: true,
+          $: false,
+          google: false,
+          log: false,
           PF: true
         }
       }

@@ -1,4 +1,4 @@
-/*! Playfair.js - v0.1.0-dev - 2013-09-24 */
+/*! Playfair.js - v0.1.0-dev - 2013-09-25 */
 
 (function( window ) {
 'use strict';
@@ -13,7 +13,8 @@ function log() {
   }
 }
 
-var PF = window.PF || {};
+var google = window.google || {},
+  PF = window.PF || {};
 
 window.PF = PF;
 
@@ -42,6 +43,12 @@ PF.utils.parseHash = function parseHash( hash ) {
   }
 
   return params;
+};
+
+//  -=-=-=-=-=-=-=-=-=-=-=-=-=- INITIALIZATION =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+PF.init = function init( hash, chartId ) {
+  // TODO: Add this.
 };
 
 
