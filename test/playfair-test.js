@@ -66,6 +66,13 @@ QUnit.test( 'Option parsing', function( assert ) {
     height: 200,
     width: 300
   }, 'Chart size falls back to default with malformed input' );
+
+  assert.deepEqual(
+    PF.opts.chd( 't:1,2,3' ), [ [ 1, 2, 3 ] ],
+    'Correctly parses data in basic format' );
+  assert.deepEqual(
+    PF.opts.chd( 's:Ad5' ), [ [ 0, 29, 57 ] ],
+    'Correctly parses data in simple format' );
 });
 
 }( this ));
