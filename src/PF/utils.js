@@ -2,6 +2,18 @@
 
 PF.utils = PF.utils || {};
 
+PF.utils.logError = function logError( errorText, errorElem ) {
+  errorElem = typeof errorElem !== 'undefined' ? errorElem : (
+    window.document.getElementById( 'playfair-errors' ));
+
+  var errorFragment = window.document.createDocumentFragment(),
+    errorTextElem = window.document.createElement( 'p' );
+
+  errorTextElem.textContent = errorText;
+  errorFragment.appendChild( errorTextElem );
+  errorElem.appendChild( errorFragment );
+};
+
 PF.utils.parseHash = function parseHash( hash ) {
   var i,
     len,

@@ -1,8 +1,24 @@
 (function( window ) {
 'use strict';
 
-var PF = window.PF,
+var document = window.document,
+  PF = window.PF,
   QUnit = window.QUnit;
+
+function setupErrorElem() {
+  var errorElem = document.createElement( 'div' ),
+    existingErrorElem = document.getElementById( 'playfair-errors' ),
+    fixture = document.getElementById( 'qunit-fixture' );
+
+  if ( existingErrorElem ) {
+    fixture.removeChild( existingErrorElem );
+  }
+
+  errorElem.setAttribute( 'id', 'playfair-errors' );
+  fixture.appendChild( errorElem );
+
+  return errorElem;
+}
 
 QUnit.test( 'Hash parsing', function( assert ) {
   var basicHash,
@@ -20,6 +36,23 @@ QUnit.test( 'Hash parsing', function( assert ) {
   assert.deepEqual(
     PF.utils.parseHash( '#' + basicHash ), basicHashResults,
     'Hash parser ignores leading hash mark' );
+});
+
+QUnit.test( 'Error logging', function( assert ) {
+  var errorElem = setupErrorElem();
+
+  PF.utils.logError( 'test error' );
+  assert.equal(
+    errorElem.getElementsByTagName( 'p' ).length, 1, 'Error logged' );
+});
+
+QUnit.test( 'Multiple-error logging', function( assert ) {
+  var errorElem = setupErrorElem();
+
+  PF.utils.logError( 'test error 1' );
+  PF.utils.logError( 'test error 2' );
+  assert.equal(
+    errorElem.getElementsByTagName( 'p' ).length, 2, 'Errors logged' );
 });
 
 }( this ));
