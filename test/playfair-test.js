@@ -8,12 +8,12 @@ QUnit.test( 'Hash parsing', function( assert ) {
   var basicHash,
     basicHashResults;
 
-  basicHash = 'a=1&b=2&c=wtf&d=ohai';
+  basicHash = 'chs=250x100&chd=t:60,40&cht=p3&chl=Hello|World';
   basicHashResults = {
-    a: '1',
-    b: '2',
-    c: 'wtf',
-    d: 'ohai'
+    'chs': '250x100',
+    'chd': 't:60,40',
+    'cht': 'p3',
+    'chl': 'Hello|World'
   };
   assert.deepEqual(
     PF.utils.parseHash( basicHash ), basicHashResults, 'Hash parsing works' );
