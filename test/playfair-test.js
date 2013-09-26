@@ -58,15 +58,6 @@ QUnit.test( 'Multiple-error logging', function( assert ) {
 QUnit.test( 'Option parsing', function( assert ) {
   var errorElem = setupErrorElem();
 
-  assert.deepEqual( PF.opts.chs( '500x450' ), {
-    height: 450,
-    width: 500
-  }, 'Correctly parses chart size' );
-  assert.deepEqual( PF.opts.chs( 'wtf' ), {
-    height: 200,
-    width: 300
-  }, 'Chart size falls back to default with malformed input' );
-
   assert.deepEqual(
     PF.opts.chd( 't:1,2,3' ), [ [ 1, 2, 3 ] ],
     'Correctly parses data in basic format' );
@@ -80,6 +71,15 @@ QUnit.test( 'Option parsing', function( assert ) {
   assert.deepEqual(
     PF.opts.chl( 'Hello|World' ), [ 'Hello', 'World' ],
     'Correctly parses pie chart labels' );
+
+  assert.deepEqual( PF.opts.chs( '500x450' ), {
+    height: 450,
+    width: 500
+  }, 'Correctly parses chart size' );
+  assert.deepEqual( PF.opts.chs( 'wtf' ), {
+    height: 200,
+    width: 300
+  }, 'Chart size falls back to default with malformed input' );
 });
 
 }( this ));
