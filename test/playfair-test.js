@@ -76,6 +76,10 @@ QUnit.test( 'Option parsing', function( assert ) {
   assert.deepEqual(
     PF.opts.chd( 'e:-CBa..' ), [ [ 3970, 90, 4095 ] ],
     'Correctly parses data in extended format' );
+
+  assert.deepEqual(
+    PF.opts.chl( 'Hello|World' ), [ 'Hello', 'World' ],
+    'Correctly parses pie chart labels' );
 });
 
 }( this ));

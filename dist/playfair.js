@@ -171,6 +171,10 @@ PF.opts.chd = function chd( rawChd ) {  // Chart data
   return parsedData;
 };
 
+PF.opts.chl = function chl( rawChl ) {  // Chart labels (pie, Google-O-Meter)
+  return rawChl.split( '|' );  // Well, that was easy.
+};
+
 PF.opts.chs = function chs( rawChs ) {  // Chart size
   var dimsFormat = /^(\d+)x(\d+)$/,
     dimsMatch,
