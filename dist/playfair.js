@@ -1,4 +1,4 @@
-/*! Playfair.js - v0.1.0-dev - 2013-09-25 */
+/*! Playfair.js - v0.1.0-dev - 2013-09-26 */
 
 (function( window ) {
 'use strict';
@@ -144,9 +144,51 @@ PF.opts.chd = function chd( rawChd ) {  // Chart data
       return seriesList;
     }( chdFormatMatch[ 2 ]));
   } else if ( chdFormatMatch[ 1 ] === 'e' ) {  // Extended text format
-    PF.utils.logError(
-      'Extended encoding format not yet supported for chd (data). Aborting.' );
-    return;
+    parsedData = (function( rawData ) {
+      var encodingOptions = ('ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+          'abcdefghijklmnopqrstuvwxyz0123456789-.'),
+        firstDigit,
+        i,
+        iLen,
+        j,
+        jLen,
+        secondDigit,
+        series,
+        seriesList,
+        seriesListRaw,
+        seriesRaw,
+        value;
+
+      seriesList = [];
+      seriesListRaw = rawData.split( ',' );
+      for ( i = 0, iLen = seriesListRaw.length; i < iLen; i++ ) {
+        series = [];
+        seriesRaw = seriesListRaw[ i ];
+
+        for ( j = 0, jLen = seriesRaw.length; j < jLen; j += 2 ) {
+          firstDigit = seriesRaw.substring( j, j + 1 );
+          secondDigit = seriesRaw.substring( j + 1, j + 2 );
+
+          if ( firstDigit === '_' || secondDigit === '_' ) {
+            value = null;
+          } else {
+            firstDigit = encodingOptions.indexOf( firstDigit );
+            secondDigit = encodingOptions.indexOf( secondDigit );
+            if ( firstDigit === -1 || secondDigit === -1 ) {
+              value = null;
+            } else {
+              value = 64 * firstDigit + secondDigit;
+            }
+          }
+
+          series.push( value );
+        }
+
+        seriesList.push( series );
+      }
+
+      return seriesList;
+    }( chdFormatMatch[ 2 ]));
   }
 
   return parsedData;

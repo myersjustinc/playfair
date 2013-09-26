@@ -73,6 +73,9 @@ QUnit.test( 'Option parsing', function( assert ) {
   assert.deepEqual(
     PF.opts.chd( 's:Ad5' ), [ [ 0, 29, 57 ] ],
     'Correctly parses data in simple format' );
+  assert.deepEqual(
+    PF.opts.chd( 'e:-CBa..' ), [ [ 3970, 90, 4095 ] ],
+    'Correctly parses data in extended format' );
 });
 
 }( this ));
