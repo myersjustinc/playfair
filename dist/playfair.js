@@ -1,4 +1,4 @@
-/*! Playfair.js - v0.1.0-dev - 2013-09-26 */
+/*! Playfair.js - v0.1.0-dev - 2013-09-27 */
 
 (function( window ) {
 'use strict';
@@ -171,9 +171,11 @@ PF.opts.chd = function chd( rawChd ) {  // Chart data
   return parsedData;
 };
 
-PF.opts.chl = function chl( rawChl ) {  // Chart labels (pie, Google-O-Meter)
-  return rawChl.split( '|' );  // Well, that was easy.
+PF.opts.chdl = function chdl( rawChdl ) {  // Legend labels
+  return (rawChdl || '').split( '|' );  // Well, that was easy.
 };
+
+PF.opts.chl = PF.opts.chdl;  // Chart labels (pie, Google-O-Meter)
 
 PF.opts.chs = function chs( rawChs ) {  // Chart size
   var dimsFormat = /^(\d+)x(\d+)$/,
