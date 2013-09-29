@@ -186,6 +186,11 @@ PF.opts.cht = function cht( rawCht ) {  // Chart type
     case 'p':
       chartClass = google.visualization.PieChart;
       break;
+    case 'pc':
+      PF.utils.logError( 'Unsupported cht (chart type) specified. Aborting.' );
+      break;
+    default:
+      PF.utils.logError( 'No cht (chart type) specified. Aborting.' );
   }
 
   return {
