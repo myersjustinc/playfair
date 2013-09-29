@@ -172,3 +172,24 @@ PF.opts.chs = function chs( rawChs ) {  // Chart size
     width: parseInt( dimsMatch[ 1 ], 10 )
   };
 };
+
+PF.opts.cht = function cht( rawCht ) {  // Chart type
+  var chartClass,
+    mainCht,
+    options = {},
+    splitCht;
+
+  switch( rawCht ) {
+    case 'p3':
+      options.is3D = true;
+      /* falls through */
+    case 'p':
+      chartClass = google.visualization.PieChart;
+      break;
+  }
+
+  return {
+    chartClass: chartClass,
+    options: options
+  };
+};

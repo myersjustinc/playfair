@@ -200,6 +200,27 @@ PF.opts.chs = function chs( rawChs ) {  // Chart size
   };
 };
 
+PF.opts.cht = function cht( rawCht ) {  // Chart type
+  var chartClass,
+    mainCht,
+    options = {},
+    splitCht;
+
+  switch( rawCht ) {
+    case 'p3':
+      options.is3D = true;
+      /* falls through */
+    case 'p':
+      chartClass = google.visualization.PieChart;
+      break;
+  }
+
+  return {
+    chartClass: chartClass,
+    options: options
+  };
+};
+
 //  -=-=-=-=-=-=-=-=-=-=-=-=-= UTILITY FUNCTIONS =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 PF.utils = PF.utils || {};
@@ -282,12 +303,31 @@ PF.init = function init( hash, chartId ) {
   });
 
   google.setOnLoadCallback(function() {
-    var chartElem = window.document.getElementById( chartId ),
+    var chart,
+      chartElem = window.document.getElementById( chartId ),
+      chartType = PF.opts.cht( hashOptions.cht ),
       dimensions = PF.opts.chs( hashOptions.chs ),
+      key,
+      options = {},
       table = PF.utils.buildTable(
-        PF.opts.chdl( hashOptions.chdl || hashOptions.chl ), PF.opts.chd );
+        PF.opts.chdl( hashOptions.chdl || hashOptions.chl ),
+        PF.opts.chd( hashOptions.chd ) );
 
-    log( 'Loaded.' );  // TODO: Fill out the rest of this.
+    // Clone chartType.options into main options object, which also will hold
+    // other configuration data for the chart we're about to initialize.
+    for ( key in chartType.options ) {
+      if ( chartType.options.hasOwnProperty( key ) ) {
+        options[ key ] = chartType.options[ key ];
+      }
+    }
+
+    // Add dimensions to the options object.
+    options.height = dimensions.height;
+    options.width = dimensions.width;
+
+    // Initialize the chart.
+    chart = new chartType.chartClass( chartElem );
+    chart.draw( table, options );
   });
 };
 
