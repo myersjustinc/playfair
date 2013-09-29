@@ -82,4 +82,24 @@ QUnit.test( 'Option parsing', function( assert ) {
   }, 'Chart size falls back to default with malformed input' );
 });
 
+google.load( 'visualization', '1.0', {
+  'packages': [ 'corechart' ]
+});
+
+google.setOnLoadCallback(function() {
+  QUnit.test( 'DataTable generation', function( assert ) {
+    var table = new google.visualization.DataTable();
+
+    table.addColumn( 'string' );
+    table.addColumn( 'number' );
+    table.addRow( [ 'a', 1 ] );
+    table.addRow( [ 'b', 2 ] );
+    table.addRow( [ 'c', 3 ] );
+
+    assert.deepEqual(
+      PF.utils.buildTable( [ 'a', 'b', 'c' ], [ [ 1, 2, 3 ] ] ),
+      table, 'Correctly combines labels and data' );
+  });
+});
+
 }( this ));

@@ -1,4 +1,4 @@
-/*! Playfair.js - v0.1.0-dev - 2013-09-27 */
+/*! Playfair.js - v0.1.0-dev - 2013-09-28 */
 
 (function( window ) {
 'use strict';
@@ -203,6 +203,40 @@ PF.opts.chs = function chs( rawChs ) {  // Chart size
 //  -=-=-=-=-=-=-=-=-=-=-=-=-= UTILITY FUNCTIONS =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 PF.utils = PF.utils || {};
+
+PF.utils.buildTable = function buildTable( labels, data ) {
+  var col,
+    colLen,
+    row,
+    rowObj,
+    series,
+    seriesLengths = [],
+    seriesMaxLength = 0,
+    table;
+
+  // Create the table schema and find the length of the longest series (i.e.,
+  // the total number of rows).
+  table = new google.visualization.DataTable();
+  table.addColumn( 'string' );  // Add label column.
+  for ( col = 0, colLen = data.length; col < colLen; col++ ) {
+    table.addColumn( 'number' );  // Add data column for this series.
+    series = data[ col ];
+    seriesLengths.push( series.length );
+  }
+  seriesMaxLength = Math.max.apply( null, seriesLengths );
+
+  // Fill in the actual data.
+  for ( row = 0; row < seriesMaxLength; row++ ) {
+    rowObj = [ labels[ row ] ];
+    for ( col = 0, colLen = data.length; col < colLen; col++ ) {
+      series = data[ col ];
+      rowObj.push( series[ row ] );
+    }
+    table.addRow( rowObj );
+  }
+
+  return table;
+};
 
 PF.utils.logError = function logError( errorText, errorElem ) {
   errorElem = typeof errorElem !== 'undefined' ? errorElem : (
