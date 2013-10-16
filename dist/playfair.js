@@ -211,6 +211,16 @@ PF.opts.cht = function cht( rawCht ) {  // Chart type
     options.is3D = true;
   } else if ( rawCht === 'p' ) {
     chartClass = google.visualization.PieChart;
+  } else if ( rawCht === 'bhs' ) {
+    chartClass = google.visualization.BarChart;
+    options.isStacked = true;
+  } else if ( rawCht === 'bvs' ) {
+    chartClass = google.visualization.ColumnChart;
+    options.isStacked = true;
+  } else if ( rawCht === 'bhg' ) {
+    chartClass = google.visualization.BarChart;
+  } else if ( rawCht === 'bvg' ) {
+    chartClass = google.visualization.ColumnChart;
   } else if ( rawCht ) {
     PF.utils.logError( 'Unsupported cht (chart type) specified. Aborting.' );
   } else {
