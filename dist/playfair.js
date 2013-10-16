@@ -1,4 +1,4 @@
-/*! Playfair.js - v0.1.0-dev - 2013-09-28 */
+/*! Playfair.js - v0.1.0-dev - 2013-10-16 */
 
 (function( window ) {
 'use strict';
@@ -206,18 +206,15 @@ PF.opts.cht = function cht( rawCht ) {  // Chart type
     options = {},
     splitCht;
 
-  switch( rawCht ) {
-    case 'p3':
-      options.is3D = true;
-      /* falls through */
-    case 'p':
-      chartClass = google.visualization.PieChart;
-      break;
-    case 'pc':
-      PF.utils.logError( 'Unsupported cht (chart type) specified. Aborting.' );
-      break;
-    default:
-      PF.utils.logError( 'No cht (chart type) specified. Aborting.' );
+  if ( rawCht === 'p3' ) {
+    chartClass = google.visualization.PieChart;
+    options.is3D = true;
+  } else if ( rawCht === 'p' ) {
+    chartClass = google.visualization.PieChart;
+  } else if ( rawCht ) {
+    PF.utils.logError( 'Unsupported cht (chart type) specified. Aborting.' );
+  } else {
+    PF.utils.logError( 'No cht (chart type) specified. Aborting.' );
   }
 
   return {
